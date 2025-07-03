@@ -123,10 +123,13 @@ for i, tx_date in enumerate(dates_in_data):
             try:
                 with open(pdf_path, "rb") as f:
                     base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-                    st.markdown(
-                        f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="500px" type="application/pdf"></iframe>',
-                        unsafe_allow_html=True
+                    st.download_button(
+                        label="📄 Download PDF of having Disputed Trans",
+                        data=base64.b64decode(base64_pdf),
+                        file_name=available_pdfs[display_key],
+                        mime="application/pdf"
                     )
+
             except Exception as e:
                 st.error(f"❌ Error loading PDF: {e}")
         else:
